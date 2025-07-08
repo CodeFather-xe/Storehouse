@@ -4,7 +4,6 @@ import Shapes.PanelBackground;
 import Shapes.RoundLabel;
 import Shapes.RoundedTextField;
 import Shapes.RoundedPasswordField;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -26,12 +25,14 @@ public class LoginFrame {
     JProgressBar bar = new JProgressBar(JProgressBar.HORIZONTAL, 0, 100);
 
     public LoginFrame() {
+
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-            SwingUtilities.updateComponentTreeUI(frame);
-            frame.revalidate();
-            frame.repaint();
-        } catch (Exception _) {
+        } catch (UnsupportedLookAndFeelException ignored) {
+            Toolkit.getDefaultToolkit().beep();
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
+            ex.printStackTrace();
+            return;
         }
         JFrame.setDefaultLookAndFeelDecorated(true);
 

@@ -49,6 +49,8 @@ public class MainFrame {
     JButton GoBack = new JButton();
 
     public MainFrame() {
+
+
         /*---------------------Frame---------------------*/
         frame.setTitle("G.S.S.A Storehouse");
         frame.setSize(1200, 800);
