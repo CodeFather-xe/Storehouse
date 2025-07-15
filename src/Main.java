@@ -7,7 +7,7 @@ public class Main {
 //        SwingUtilities.invokeLater(LoginFrame::new);
 //        SwingUtilities.invokeLater(CreateAccount::new);
 //        SwingUtilities.invokeLater(MainFrame::new);
-        SwingUtilities.invokeLater(SearchForFrame::new);
+        SwingUtilities.invokeLater(EditProduct::new);
 //        SwingUtilities.invokeLater(EditProduct::new);
 
 

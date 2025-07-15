@@ -17,6 +17,7 @@ public class Administrator {
 //    public static ArrayList<OrderClass> Orders = new ArrayList<>();
 
 
+
     /*--------Constructors--------*/
     public Administrator(String username, String password) {
         this.username = username;
@@ -57,6 +58,43 @@ public class Administrator {
 //    }
 
 
+    public static void readItem(String filePath) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            String name = "";
+            int id = 0;
+            double price = 0.0;
+            int quantity = 0;
+            String imagePath = "";
+
+            while ((line = br.readLine()) != null) {
+                if (line.startsWith("#ID:")) {
+                    id = Integer.parseInt(line.replace("#ID:", "").trim());
+                } else if (line.startsWith("Name:")) {
+                    name = line.replace("Name:", "").trim();
+                } else if (line.startsWith("Price:")) {
+                    price = Double.parseDouble(line.replace("Price:", "").trim());
+                } else if (line.startsWith("Current Quantity:")) {
+                    quantity = Integer.parseInt(line.replace("Current Quantity:", "").trim());
+                } else if (line.startsWith("Image Path:")) {
+                    imagePath = line.replace("Image Path:", "").trim();
+                } else if (line.startsWith("---------------------------------------")) {
+                    Item item = new Item(name, id, price, quantity, imagePath);
+                    if (filePath.equals("Computers.txt")) {
+                        computers.add(item);
+                    } else if (filePath.equals("Accessories.txt")) {
+                        accessories.add(item);
+                    } else {
+                        officeFurniture.add(item);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public static void writeItemToFile(int id, String name, double price, String imagePath, int quantity, String file) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
             writer.write("#ID: " + id);
@@ -74,38 +112,38 @@ public class Administrator {
         }
     }
 
-    public static void readItemsFromFileToArray(String filePath) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            String name = "";
-            int id = 0;
-            double price = 0.0;
-            int quantity = 0;
-            String imagePath = "";
-            while ((line = reader.readLine()) != null) {
-                if (line.startsWith("#ID:")) {
-                    id = Integer.parseInt(line.replace("#ID:", "").trim());
-                } else if (line.startsWith("Name:")) {
-                    name = line.replace("Name:", "").trim();
-                } else if (line.startsWith("Price:")) {
-                    price = Double.parseDouble(line.replace("Price:", "").trim());
-                } else if (line.startsWith("Current Quantity:")) {
-                    quantity = Integer.parseInt(line.replace("Current Quantity:", "").trim());
-                } else if (line.startsWith("Image Path:")) {
-                    imagePath = line.replace("Image Path:", "").trim();
-                } else if (line.startsWith("---------------------------------------")) {
-                    Item item = new Item(name, id, price, quantity, imagePath);
-                    if (filePath.equals("./Computers.txt"))
-                        Administrator.computers.add(item);
-                    else if (filePath.equals("./Accessories.txt"))
-                        Administrator.accessories.add(item);
-                    else
-                        Administrator.officeFurniture.add(item);
-                }
-            }
-        } catch (IOException _) {
-        }
-    }
+//    public static void readItemsFromFileToArray(String filePath) {
+//        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+//            String line;
+//            String name = "";
+//            int id = 0;
+//            double price = 0.0;
+//            int quantity = 0;
+//            String imagePath = "";
+//            while ((line = reader.readLine()) != null) {
+//                if (line.startsWith("#ID:")) {
+//                    id = Integer.parseInt(line.replace("#ID:", "").trim());
+//                } else if (line.startsWith("Name:")) {
+//                    name = line.replace("Name:", "").trim();
+//                } else if (line.startsWith("Price:")) {
+//                    price = Double.parseDouble(line.replace("Price:", "").trim());
+//                } else if (line.startsWith("Current Quantity:")) {
+//                    quantity = Integer.parseInt(line.replace("Current Quantity:", "").trim());
+//                } else if (line.startsWith("Image Path:")) {
+//                    imagePath = line.replace("Image Path:", "").trim();
+//                } else if (line.startsWith("---------------------------------------")) {
+//                    Item item = new Item(name, id, price, quantity, imagePath);
+//                    if (filePath.equals("./Computers.txt"))
+//                        Administrator.computers.add(item);
+//                    else if (filePath.equals("./Accessories.txt"))
+//                        Administrator.accessories.add(item);
+//                    else
+//                        Administrator.officeFurniture.add(item);
+//                }
+//            }
+//        } catch (IOException _) {
+//        }
+//    }
 
     /*To Edit a Meal From The Menu*/
 //    public static void editMealInFile(String oldName, String newName, String newType, int newTotalQuantity,

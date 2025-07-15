@@ -1,6 +1,7 @@
 package UI_Storehouse;
 
 
+import LogicalClasses.Item;
 import Shapes.PanelBackground;
 import Shapes.RoundedTextField;
 
@@ -197,8 +198,7 @@ public class AddEdit_Meal {
 
 
     /*Edit Meal*/
-//    public AddEdit_Meal(JFrame mainframe, MealClass meal, String tabTitle) {
-    public AddEdit_Meal(JFrame mainframe) {
+    public AddEdit_Meal(JFrame mainframe, Item item, String tabTitle) {
 //        nameField = new RoundedTextField(meal.getNameMeal(), 20);
 //        priceField = new RoundedTextField(String.valueOf(meal.getPriceMeal()) + '$', 20);
 //        quantityField = new RoundedTextField(meal.getTotalQuantityMeal() + " Pieces", 20);

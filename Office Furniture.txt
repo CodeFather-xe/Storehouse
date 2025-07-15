@@ -1,0 +1,60 @@
+#ID: 3001
+Name: Office Desk - Wood Finish
+Price: 250.00
+Current Quantity: 5
+Image Path: images/desk_wood.png
+---------------------------------------
+#ID: 3002
+Name: Ergonomic Office Chair
+Price: 150.00
+Current Quantity: 10
+Image Path: images/chair_ergonomic.png
+---------------------------------------
+#ID: 3003
+Name: Bookshelf 5-Shelves
+Price: 120.00
+Current Quantity: 3
+Image Path: images/bookshelf.png
+---------------------------------------
+#ID: 3004
+Name: Filing Cabinet - 3 Drawers
+Price: 80.50
+Current Quantity: 8
+Image Path: images/cabinet_3d.png
+---------------------------------------
+#ID: 3005
+Name: Conference Table - 6 Seats
+Price: 600.00
+Current Quantity: 2
+Image Path: images/conference_table.png
+---------------------------------------
+#ID: 3006
+Name: Meeting Room Chair - Leather
+Price: 130.00
+Current Quantity: 6
+Image Path: images/meeting_chair.png
+---------------------------------------
+#ID: 3007
+Name: Adjustable Standing Desk
+Price: 320.00
+Current Quantity: 4
+Image Path: images/standing_desk.png
+---------------------------------------
+#ID: 3008
+Name: Steel Storage Cabinet
+Price: 140.00
+Current Quantity: 7
+Image Path: images/storage_cabinet.png
+---------------------------------------
+#ID: 3009
+Name: Round Table - Small
+Price: 95.00
+Current Quantity: 5
+Image Path: images/round_table.png
+---------------------------------------
+#ID: 3010
+Name: Visitor Reception Sofa
+Price: 400.00
+Current Quantity: 1
+Image Path: images/reception_sofa.png
+---------------------------------------

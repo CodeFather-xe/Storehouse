@@ -1,5 +1,9 @@
 package UI_Storehouse;
+
+import LogicalClasses.Administrator;
+import LogicalClasses.Item;
 import Shapes.PanelBackground;
+
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
@@ -21,7 +25,7 @@ public class EditProduct {
     JScrollPane accessoriesScroll = new JScrollPane(accessoriesPanel);
     JPanel furniturePanel = new JPanel();
     JScrollPane furnitureScroll = new JScrollPane(furniturePanel);
-    
+
     JPanel productDetailsPanel = new JPanel();
 
     PanelBackground MainBackground;
@@ -31,6 +35,9 @@ public class EditProduct {
     JTabbedPane tabbedPane = new JTabbedPane();
 
     /***************************************/
+    JLabel productidLabel = new JLabel();
+    JLabel getId = new JLabel();
+
     JLabel productNameLabel = new JLabel();
     JLabel getName = new JLabel();
 
@@ -39,8 +46,6 @@ public class EditProduct {
 
     JLabel productQuantityLabel = new JLabel();
     JLabel getQuantity = new JLabel();
-    JLabel productDetailsLabel = new JLabel();
-    JTextArea getDetails = new JTextArea();
 
     Font minefont = new Font("Arial", Font.BOLD, 24);
     Font secfont = new Font("Arial", Font.BOLD + Font.ITALIC, 20);
@@ -49,21 +54,22 @@ public class EditProduct {
     public EditProduct() {
 
         //********************************************************//
-//        AdminClass.readMeals("Appetizers.txt");
-//        AdminClass.readMeals("Main Meals.txt");
-//        AdminClass.readMeals("furnitures.txt");
-//        for (MealClass x : AdminClass.AppetizerMeals) {
-//            addCookingButton(computersPanel, x);
-//        }
-//        for (MealClass x : AdminClass.MainMealMeals) {
-//            addCookingButton(accessoriesPanel, x);
-//        }
-//        for (MealClass x : AdminClass.furnitureMeals) {
-//            addCookingButton(furniturePanel, x);
-//        }
-        //********************************************************//        frame.setTitle("Bite Byte Restaurant");
+        Administrator.readItem("Computers.txt");
+        Administrator.readItem("Accessories.txt");
+        Administrator.readItem("Office Furniture.txt");
+        for (Item x : Administrator.computers) {
+            addCookingButton(computersPanel, x);
+        }
+        for (Item x : Administrator.accessories) {
+            addCookingButton(accessoriesPanel, x);
+        }
+        for (Item x : Administrator.officeFurniture) {
+            addCookingButton(furniturePanel, x);
+        }
+        //********************************************************//
+        frame.setTitle("G.S.S.A Storehouse");
         frame.setSize(1200, 800);
-        frame.setTitle("Edit Menu");
+        frame.setTitle("Edit Storage");
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -90,8 +96,8 @@ public class EditProduct {
                 path = "Accessories.txt";
                 array = "Accessories";
             } else {
-                path = "furnitures.txt";
-                array = "Furnitures";
+                path = "Office Furniture.txt";
+                array = "furnitures";
             }
 
             AddProduct.addActionListener(_ -> {
@@ -106,22 +112,22 @@ public class EditProduct {
                 Component invoker = popupMenu.getInvoker();
                 Container parent = invoker.getParent();
                 if (invoker instanceof ButtonForMeals_EditFrame) {
-//                    AddEdit_Meal EditFrame = new AddEdit_Meal(frame, ((ButtonForMeals_EditFrame) invoker).currMeal, array);
-//                    if (EditFrame.isClosed()) {// if the user click on close button we will not do anything
+                    AddEdit_Meal EditFrame = new AddEdit_Meal(frame, ((ButtonForMeals_EditFrame) invoker).currItem, array);
+                    if (EditFrame.isClosed()) {// if the user click on close button we will not do anything
 //                        refreshMealPanel(array, path, parent);
-//                    }
+                    }
                 }
             });
             DeleteProduct.addActionListener(_ -> {
                 Component invoker = popupMenu.getInvoker();
                 Container parent = invoker.getParent();
                 if (invoker instanceof ButtonForMeals_EditFrame) {
-//                    String MealName = String.valueOf(((ButtonForMeals_EditFrame) invoker).currMeal.getNameMeal());
-//                    if (DialogMSG.ConfirmDeletion(MealName)) {
-//                        AdminClass.removeMealFromFile(MealName, path);
-//                        DialogMSG.DeletionSuccess(MealName);
+                    String ItemName = String.valueOf(((ButtonForMeals_EditFrame) invoker).currItem.getName());
+                    if (DialogMSG.ConfirmDeletion(ItemName)) {
+                        Administrator.removeItemFromFile(ItemName, path);
+                        DialogMSG.DeletionSuccess(ItemName);
 //                        refreshMealPanel(array, path, parent);
-//                    }
+                    }
                 }
             });
         });
@@ -129,12 +135,12 @@ public class EditProduct {
         /*-------Information Modifiers-------*/
         Date today = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        Details.setText("<html><body style='width: 300px; line-height: 10;'>" + "Admin: " +" Admin.getUsername()" + "<br>" + formatter.format(today)    // Because You print Label Not String :)
+        Details.setText("<html><body style='width: 300px; line-height: 10;'>" + "Admin: " + " Admin.getUsername()" + "<br>" + formatter.format(today)    // Because You print Label Not String :)
                 + "</body></html>");
         Details.setFont(new Font("Arial", Font.BOLD, 20));
         Details.setForeground(Color.WHITE);
 
-        ImageIcon imageIcon = new ImageIcon("src\\Images\\Backgrounds\\OriRestaurant Logo.png");
+        ImageIcon imageIcon = new ImageIcon("src/Resources/warehouse.png");
         Image image = imageIcon.getImage().getScaledInstance(250, 200, Image.SCALE_SMOOTH);
         ImageIcon scaledIcon = new ImageIcon(image);
         JLabel RestaurantLogo = new JLabel(scaledIcon);
@@ -173,7 +179,7 @@ public class EditProduct {
         tabbedPane.setBounds(350, 0, 825, 750);
         tabbedPane.setOpaque(false);
         //--------------//
-        MainBackground = new PanelBackground("src\\Images\\Backgrounds\\Edit Menu Background.jpg");
+        MainBackground = new PanelBackground("src/Resources/Edit.jpg");
         MainBackground.setLayout(null);
         /*-------productDetailsPanel-------*/
         productDetailsPanel.setOpaque(false);
@@ -182,7 +188,17 @@ public class EditProduct {
                 BorderFactory.createBevelBorder(BevelBorder.RAISED),
                 new EmptyBorder(4, 4, 4, 4)
         ));
-        productNameLabel.setText("Meal's Name:");
+
+        productidLabel.setText("Item's ID:");
+        productidLabel.setFont(minefont);
+        productidLabel.setForeground(new Color(0x8d6e63));
+        productidLabel.setPreferredSize(new Dimension(250, 20));
+
+        getId.setFont(secfont);
+        getId.setPreferredSize(new Dimension(250, 30));
+        getId.setForeground(Color.white);
+
+        productNameLabel.setText("Item's Name:");
         productNameLabel.setFont(minefont);
         productNameLabel.setForeground(new Color(0x8d6e63));
         productNameLabel.setPreferredSize(new Dimension(250, 20));
@@ -191,7 +207,7 @@ public class EditProduct {
         getName.setPreferredSize(new Dimension(250, 30));
         getName.setForeground(Color.white);
 
-        productPriceLabel.setText("Meal's Price:");
+        productPriceLabel.setText("Item's Price:");
         productPriceLabel.setFont(minefont);
         productPriceLabel.setForeground(new Color(0x8d6e63));
         productPriceLabel.setPreferredSize(new Dimension(250, 20));
@@ -201,7 +217,7 @@ public class EditProduct {
         getPrice.setForeground(Color.white);
         getPrice.setPreferredSize(new Dimension(250, 30));
 
-        productQuantityLabel.setText("Meal's Quantity:");
+        productQuantityLabel.setText("Item's Quantity:");
         productQuantityLabel.setFont(minefont);
         productQuantityLabel.setForeground(new Color(0x8d6e63));
         productQuantityLabel.setPreferredSize(new Dimension(250, 20));
@@ -210,35 +226,15 @@ public class EditProduct {
         getQuantity.setForeground(Color.white);
         getQuantity.setPreferredSize(new Dimension(250, 30));
 
-        productDetailsLabel.setText("Meal's Details:");
-        productDetailsLabel.setFont(minefont);
-        productDetailsLabel.setForeground(new Color(0x8d6e63));
-        productDetailsLabel.setPreferredSize(new Dimension(250, 20));
 
-        getDetails.setFont(secfont);
-        getDetails.setLineWrap(true);
-        getDetails.setWrapStyleWord(true);
-        getDetails.setOpaque(true);
-        getDetails.setBackground(new Color(0, 0, 0, 100));
-        getDetails.setEditable(false);
-        getDetails.setForeground(Color.white);
-        getDetails.setPreferredSize(new Dimension(285, 150));
-        getDetails.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                frame.repaint();
-            }
-        });
-        getDetails.addCaretListener(_ -> frame.repaint());
-
+        productDetailsPanel.add(productidLabel);
+        productDetailsPanel.add(getId);
         productDetailsPanel.add(productNameLabel);
         productDetailsPanel.add(getName);
         productDetailsPanel.add(productPriceLabel);
         productDetailsPanel.add(getPrice);
         productDetailsPanel.add(productQuantityLabel);
         productDetailsPanel.add(getQuantity);
-        productDetailsPanel.add(productDetailsLabel);
-        productDetailsPanel.add(getDetails);
         productDetailsPanel.setVisible(true);
 
 
@@ -247,9 +243,9 @@ public class EditProduct {
         InformationPanel.add(productDetailsPanel, BorderLayout.CENTER);
         InformationPanel.add(Details, BorderLayout.SOUTH);
         //--------------//
-        tabbedPane.addTab("Appetizers", computersScroll);
-        tabbedPane.addTab("Main Meals", accessoriesScroll);
-        tabbedPane.addTab("furnitures", furnitureScroll);
+        tabbedPane.addTab("Computers", computersScroll);
+        tabbedPane.addTab("Accessories", accessoriesScroll);
+        tabbedPane.addTab("Office Furniture", furnitureScroll);
         //--------------//
         MainBackground.add(InformationPanel);
         MainBackground.add(tabbedPane);
@@ -264,17 +260,16 @@ public class EditProduct {
         JLabel NameLabel = new JLabel();
         JLabel PriceLabel = new JLabel();
         JPanel InfoPanel = new JPanel();
-//        MealClass currMeal;
+        Item currItem;
 
-        //        public ButtonForMeals_EditFrame(MealClass meal) {
-        public ButtonForMeals_EditFrame() {
-//            currMeal = meal;
+        public ButtonForMeals_EditFrame(Item item) {
+            currItem = item;
             this.setLayout(new BorderLayout());
             this.setPreferredSize(new Dimension(250, 160));
             this.setMaximumSize(new Dimension(250, 160));
 
             /*---------Details Button----------*/
-            ImageIcon imageIcon = new ImageIcon(); //~ obj.getImage
+            ImageIcon imageIcon = new ImageIcon(""); //~ obj.getImage
             Image imgButton = imageIcon.getImage();
             Image scaledImgDetails = imgButton.getScaledInstance(250, 130, Image.SCALE_SMOOTH);
             imageIcon = new ImageIcon(scaledImgDetails);
@@ -283,10 +278,10 @@ public class EditProduct {
             DetailsButton.setPreferredSize(new Dimension(100, 100));
             DetailsButton.setMaximumSize(new Dimension(100, 100));
             DetailsButton.addActionListener(_ -> {
-//                getName.setText(/* obj.getName*/);
-//                getPrice.setText(String.valueOf(/* obj.getPrice*/+ '$');
-//                getDetails.setText(/* obj.getDeails*/);
-//                getQuantity.setText(/* obj.getQuantity*/ + " Pieces");
+                getId.setText(String.valueOf(item.getId()));
+                getName.setText(item.getName());
+                getPrice.setText(String.valueOf(item.getPrice() + '$'));
+                getQuantity.setText(item.getQuantity() + " Pieces");
                 frame.repaint();
             });
 
@@ -298,10 +293,10 @@ public class EditProduct {
 
             NameLabel.setForeground(Color.WHITE);
             NameLabel.setFont(new Font("Arial", Font.BOLD, 15));
-//            NameLabel.setText(/* obj.getName*/);
+            NameLabel.setText(item.getName());
 
             PriceLabel.setForeground(Color.WHITE);
-//            PriceLabel.setText( /* obj.getPrice */ + '$');
+            PriceLabel.setText(String.valueOf(item.getPrice() + '$'));
             PriceLabel.setFont(new Font("Arial", Font.BOLD, 15));
 
             /*-------------Add Component--------------*/
@@ -313,11 +308,10 @@ public class EditProduct {
     }
 
     // to Read From The Array And Passing data in ButtonForMeals_EditFrame To Show It
-//    public void addCookingButton(JPanel panel, Produt produt) {
-    public void addCookingButton() {
-//        ButtonForMeals_EditFrame newMeal = new ButtonForMeals_EditFrame(produt);
-        ButtonForMeals_EditFrame newMeal = new ButtonForMeals_EditFrame();
-        newMeal.addMouseListener(new MouseAdapter() {
+
+    public void addCookingButton(JPanel panel, Item item) {
+        ButtonForMeals_EditFrame newItem = new ButtonForMeals_EditFrame(item);
+        newItem.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 showPopupMenu(e);
@@ -330,14 +324,14 @@ public class EditProduct {
 
             private void showPopupMenu(MouseEvent e) {
                 if (e.isPopupTrigger()) {
-                    popupMenu.show(newMeal, e.getX(), e.getY());
-                    popupMenu.setInvoker(newMeal);
+                    popupMenu.show(newItem, e.getX(), e.getY());
+                    popupMenu.setInvoker(newItem);
                 }
             }
         });
-//        panel.add(newMeal);
-//        panel.revalidate();
-//        panel.repaint();
+        panel.add(newItem);
+        panel.revalidate();
+        panel.repaint();
     }
 
     // to Refresh the Meals onn the panel after any operation(Add, Edit, delete)
@@ -368,5 +362,5 @@ public class EditProduct {
 //        parent.repaint();
 //        frame.revalidate();
 //        frame.repaint();
-    }
+}
 
