@@ -127,7 +127,8 @@ public class SearchForFrame {
         panelSearch.add(Box.createVerticalStrut(10));
 
         ImageProduct = new PanelBackground("src\\Resources\\Asus Tuf Laptop.png");
-        ImageProduct.setBounds(90, 225, 450, 450);
+        ImageProduct.setBounds(25, 230, 500, 430);
+        ImageProduct.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(new Color(0xdaa662)), "Image Product"));
 
 
         /*-------Panel Modifies-------*/
@@ -158,6 +159,4 @@ public class SearchForFrame {
         frame.add(ImageBackground);
         frame.setVisible(true);
     }
-
-
 }

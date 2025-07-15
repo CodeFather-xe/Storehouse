@@ -2,14 +2,17 @@ package UI_Storehouse;
 
 import Shapes.ArrowButton;
 import Shapes.PanelBackground;
-
+import Shapes.ToggleSwitch;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class MainFrame {
 
     JFrame frame = new JFrame();
     JProgressBar bar = new JProgressBar(JProgressBar.HORIZONTAL, 0, 100);
+    ToggleSwitch switchAlgorithm = new ToggleSwitch();
 
     //! Right Items
     JPanel SecondaryButtonsPanel = new JPanel();
@@ -49,8 +52,6 @@ public class MainFrame {
     JButton GoBack = new JButton();
 
     public MainFrame() {
-
-
         /*---------------------Frame---------------------*/
         frame.setTitle("G.S.S.A Storehouse");
         frame.setSize(1200, 800);
@@ -210,6 +211,18 @@ public class MainFrame {
         ShipmentButton.setIcon(iconShipment);
         ShipmentButton.setBounds(20, 550, 300, 125);
         ShipmentButton.setBorder(BorderFactory.createLineBorder(new Color(0xdaa662), 2, true));
+        //------------//
+        JLabel status = new JLabel("Fast Mode OFF");
+        status.setBounds(50, 100, 200, 50);
+        switchAlgorithm.setBounds(100, 100, 200, 50);
+        switchAlgorithm.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    frame.repaint();
+                    status.setText(switchAlgorithm.isSelected() ? "Fast Mode ON" : "Fast Mode OFF");
+                }
+            });
+//
 
         //?  Right Section
         searchForShipmentButton = createSecondaryButton(searchForShipmentButton, "Search For Shipment");
@@ -267,6 +280,8 @@ public class MainFrame {
         MainBackground.add(NextButton);
         MainBackground.add(GoBack);
         MainBackground.add(bar);
+        MainBackground.add(status);
+        MainBackground.add(switchAlgorithm);
         MainBackground.add(SecondaryButtonsPanel);
         MainBackground.add(ManageMainOperationPanel);
         //------------//

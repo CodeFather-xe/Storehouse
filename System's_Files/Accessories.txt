@@ -1,0 +1,60 @@
+#ID: 2001
+Name: Logitech MX Master 3 Mouse
+Price: 99.99
+Current Quantity: 25
+Image Path: images/logitech_mx3.png
+---------------------------------------
+#ID: 2002
+Name: Razer DeathAdder V2
+Price: 49.95
+Current Quantity: 20
+Image Path: images/razer_mouse.png
+---------------------------------------
+#ID: 2003
+Name: HP Wireless Mouse X200
+Price: 15.00
+Current Quantity: 50
+Image Path: images/hp_mouse.png
+---------------------------------------
+#ID: 2004
+Name: Lenovo ThinkPad Backpack
+Price: 39.99
+Current Quantity: 15
+Image Path: images/lenovo_bag.png
+---------------------------------------
+#ID: 2005
+Name: Targus Laptop Bag 15.6"
+Price: 45.00
+Current Quantity: 18
+Image Path: images/targus_bag.png
+---------------------------------------
+#ID: 2006
+Name: Dell Wireless Keyboard
+Price: 29.99
+Current Quantity: 30
+Image Path: images/dell_keyboard.png
+---------------------------------------
+#ID: 2007
+Name: Logitech K120 Keyboard
+Price: 19.90
+Current Quantity: 40
+Image Path: images/logitech_k120.png
+---------------------------------------
+#ID: 2008
+Name: ASUS ROG Gaming Mouse Pad
+Price: 25.50
+Current Quantity: 35
+Image Path: images/asus_pad.png
+---------------------------------------
+#ID: 2009
+Name: Microsoft Designer Compact Keyboard
+Price: 69.99
+Current Quantity: 22
+Image Path: images/microsoft_keyboard.png
+---------------------------------------
+#ID: 2010
+Name: Lenovo USB-C Hub Adapter
+Price: 55.00
+Current Quantity: 10
+Image Path: images/lenovo_hub.png
+---------------------------------------
