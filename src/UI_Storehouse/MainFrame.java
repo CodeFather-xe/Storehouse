@@ -3,6 +3,7 @@ package UI_Storehouse;
 import Shapes.ArrowButton;
 import Shapes.PanelBackground;
 import Shapes.ToggleSwitch;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -22,7 +23,7 @@ public class MainFrame {
     JButton searchProductButton = new JButton();
     JButton editRepositoryButton = new JButton();
     JButton ShowAllProductsButton = new JButton();
-    /*--------- Order --------*/
+    /*--------- LogicalClasses.Order --------*/
     JPanel OrderSecondaryButtons = new JPanel();
     JButton searchForOrderButton = new JButton();
     JButton editOrdersButton = new JButton();
@@ -125,14 +126,23 @@ public class MainFrame {
 
         //?  Right Section
         searchProductButton = createSecondaryButton(searchProductButton, "Search For Product");
-        searchProductButton.addActionListener(_ -> {
-
-            SwingUtilities.invokeLater(SearchForFrame::new);
-
-            frame.dispose();
-        });
         editRepositoryButton = createSecondaryButton(editRepositoryButton, "Edit The Repository");
         ShowAllProductsButton = createSecondaryButton(ShowAllProductsButton, " Show All Products ");
+        searchProductButton.addActionListener(_ -> {
+            frame.dispose();
+            SwingUtilities.invokeLater(ProductSearch::new);
+        });
+
+        editRepositoryButton.addActionListener(_ -> {
+            frame.dispose();
+            SwingUtilities.invokeLater(EditProduct::new);
+        });
+
+        ShowAllProductsButton.addActionListener(_ -> {
+            frame.dispose();
+            SwingUtilities.invokeLater(ShowAllProducts::new);
+        });
+
 
         ProductSecondaryButtons.setLayout(new BoxLayout(ProductSecondaryButtons, BoxLayout.Y_AXIS));
         ProductSecondaryButtons.setOpaque(false);
@@ -152,7 +162,7 @@ public class MainFrame {
             frame.repaint();
         });
 
-        /*---------------------Order Modifies---------------------*/
+        /*---------------------LogicalClasses.Order Modifies---------------------*/
         //?  left Section
         OrderText1.setText("Ord");
         OrderText1.setForeground(Color.WHITE);
@@ -174,9 +184,10 @@ public class MainFrame {
         OrderButton.setBounds(125, 375, 300, 125);
         OrderButton.setBorder(BorderFactory.createLineBorder(new Color(0xdaa662), 2, true));
         //?  Right Section
-        searchForOrderButton = createSecondaryButton(searchForOrderButton, "Search For Order");
+        searchForOrderButton = createSecondaryButton(searchForOrderButton, "Search For LogicalClasses.Order");
         editOrdersButton = createSecondaryButton(editOrdersButton, "Edit The Orders");
         ShowAllOrdersButton = createSecondaryButton(ShowAllOrdersButton, " Show All Orders ");
+
 
         OrderSecondaryButtons.setLayout(new BoxLayout(OrderSecondaryButtons, BoxLayout.Y_AXIS));
         OrderSecondaryButtons.setOpaque(false);
@@ -216,12 +227,12 @@ public class MainFrame {
         status.setBounds(50, 100, 200, 50);
         switchAlgorithm.setBounds(100, 100, 200, 50);
         switchAlgorithm.addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e) {
-                    frame.repaint();
-                    status.setText(switchAlgorithm.isSelected() ? "Fast Mode ON" : "Fast Mode OFF");
-                }
-            });
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                frame.repaint();
+                status.setText(switchAlgorithm.isSelected() ? "Fast Mode ON" : "Fast Mode OFF");
+            }
+        });
 //
 
         //?  Right Section

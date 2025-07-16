@@ -1,5 +1,7 @@
 package UI_Storehouse;
 
+import LogicalClasses.DialogMSG;
+import LogicalClasses.GeneralClass;
 import Shapes.PanelBackground;
 import Shapes.RoundLabel;
 import Shapes.RoundedTextField;
@@ -35,7 +37,6 @@ public class LoginFrame {
             return;
         }
         JFrame.setDefaultLookAndFeelDecorated(true);
-
         frame.setTitle("GSSA StoreHouse");
         frame.setSize(600, 800);
         frame.setResizable(false);

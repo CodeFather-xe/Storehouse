@@ -11,9 +11,9 @@ public class Administrator {
     static int setID = 1;
 
     public static final String ActivationKey = "8122024";
-    public static ArrayList<Item> computers = new ArrayList<>();
-    public static ArrayList<Item> accessories = new ArrayList<>();
-    public static ArrayList<Item> officeFurniture = new ArrayList<>();
+    public static ArrayList<Products> computers = new ArrayList<>();
+    public static ArrayList<Products> accessories = new ArrayList<>();
+    public static ArrayList<Products> officeFurniture = new ArrayList<>();
 //    public static ArrayList<OrderClass> Orders = new ArrayList<>();
 
 
@@ -79,13 +79,13 @@ public class Administrator {
                 } else if (line.startsWith("Image Path:")) {
                     imagePath = line.replace("Image Path:", "").trim();
                 } else if (line.startsWith("---------------------------------------")) {
-                    Item item = new Item(name, id, price, quantity, imagePath);
+                    Products products = new Products(name, id, price, quantity, imagePath);
                     if (filePath.equals("Computers.txt")) {
-                        computers.add(item);
+                        computers.add(products);
                     } else if (filePath.equals("Accessories.txt")) {
-                        accessories.add(item);
+                        accessories.add(products);
                     } else {
-                        officeFurniture.add(item);
+                        officeFurniture.add(products);
                     }
                 }
             }
@@ -132,7 +132,7 @@ public class Administrator {
 //                } else if (line.startsWith("Image Path:")) {
 //                    imagePath = line.replace("Image Path:", "").trim();
 //                } else if (line.startsWith("---------------------------------------")) {
-//                    Item item = new Item(name, id, price, quantity, imagePath);
+//                    Products item = new Products(name, id, price, quantity, imagePath);
 //                    if (filePath.equals("./Computers.txt"))
 //                        Administrator.computers.add(item);
 //                    else if (filePath.equals("./Accessories.txt"))
@@ -249,11 +249,11 @@ public class Administrator {
     }
 
 
-    /*To Write The Order From GUI To The File*/
+    /*To Write The LogicalClasses.Order From GUI To The File*/
 //    public static void writeOrderToFile(int orderNum, String owner, String type, String phone, List<MealClass> meals,
 //                                        float priceOrder, String payMethod, String note) {
 //        try (BufferedWriter writer = new BufferedWriter(new FileWriter("Orders.txt", true))) {
-//            writer.write("Order #" + orderNum);
+//            writer.write("LogicalClasses.Order #" + orderNum);
 //            writer.newLine();
 //            writer.write("Owner: " + owner);
 //            writer.newLine();
@@ -284,14 +284,14 @@ public class Administrator {
 //    }
 
 
-    /*To Read The Order From File To The GUI*/
+    /*To Read The LogicalClasses.Order From File To The GUI*/
 //    public static void readOrdersFromFile() {
 //        try (BufferedReader reader = new BufferedReader(new FileReader("Orders.txt"))) {
 //            String line;
 //            OrderClass currentOrder = null;
 //
 //            while ((line = reader.readLine()) != null) {
-//                if (line.startsWith("Order #")) {
+//                if (line.startsWith("LogicalClasses.Order #")) {
 //                    if (currentOrder != null) {
 //                        AdminClass.Orders.add(currentOrder);
 //                    }

@@ -1,7 +1,8 @@
 package UI_Storehouse;
 
 import LogicalClasses.Administrator;
-import LogicalClasses.Item;
+import LogicalClasses.DialogMSG;
+import LogicalClasses.Products;
 import Shapes.PanelBackground;
 
 import javax.swing.*;
@@ -50,21 +51,21 @@ public class EditProduct {
     Font minefont = new Font("Arial", Font.BOLD, 24);
     Font secfont = new Font("Arial", Font.BOLD + Font.ITALIC, 20);
 
-    //    public EditProduct(AdminClass Admin) {
+    //    public EditProduct(Administrator Admin) {
     public EditProduct() {
 
         //********************************************************//
         Administrator.readItem("Computers.txt");
         Administrator.readItem("Accessories.txt");
         Administrator.readItem("Office Furniture.txt");
-        for (Item x : Administrator.computers) {
-            addCookingButton(computersPanel, x);
+        for (Products x : Administrator.computers) {
+            addItemButton(computersPanel, x);
         }
-        for (Item x : Administrator.accessories) {
-            addCookingButton(accessoriesPanel, x);
+        for (Products x : Administrator.accessories) {
+            addItemButton(accessoriesPanel, x);
         }
-        for (Item x : Administrator.officeFurniture) {
-            addCookingButton(furniturePanel, x);
+        for (Products x : Administrator.officeFurniture) {
+            addItemButton(furniturePanel, x);
         }
         //********************************************************//
         frame.setTitle("G.S.S.A Storehouse");
@@ -97,24 +98,24 @@ public class EditProduct {
                 array = "Accessories";
             } else {
                 path = "Office Furniture.txt";
-                array = "furnitures";
+                array = "Furnitures";
             }
 
             AddProduct.addActionListener(_ -> {
                 Component invoker = popupMenu.getInvoker();
                 Container parent = invoker.getParent();
-                AddEdit_Meal AddFrame = new AddEdit_Meal(frame, array);
+                AddEdit_Item AddFrame = new AddEdit_Item(frame, array);
                 if (AddFrame.isClosed()) { // if the user click on (close button) we will not do anything
-//                    refreshMealPanel(array, path, parent);
+                    refreshItemPanel(array, path, parent);
                 }
             });
             EditProduct.addActionListener(_ -> {
                 Component invoker = popupMenu.getInvoker();
                 Container parent = invoker.getParent();
                 if (invoker instanceof ButtonForMeals_EditFrame) {
-                    AddEdit_Meal EditFrame = new AddEdit_Meal(frame, ((ButtonForMeals_EditFrame) invoker).currItem, array);
+                    AddEdit_Item EditFrame = new AddEdit_Item(frame, ((ButtonForMeals_EditFrame) invoker).currProducts, array);
                     if (EditFrame.isClosed()) {// if the user click on close button we will not do anything
-//                        refreshMealPanel(array, path, parent);
+                        refreshItemPanel(array, path, parent);
                     }
                 }
             });
@@ -122,11 +123,11 @@ public class EditProduct {
                 Component invoker = popupMenu.getInvoker();
                 Container parent = invoker.getParent();
                 if (invoker instanceof ButtonForMeals_EditFrame) {
-                    String ItemName = String.valueOf(((ButtonForMeals_EditFrame) invoker).currItem.getName());
+                    String ItemName = String.valueOf(((ButtonForMeals_EditFrame) invoker).currProducts.getName());
                     if (DialogMSG.ConfirmDeletion(ItemName)) {
                         Administrator.removeItemFromFile(ItemName, path);
                         DialogMSG.DeletionSuccess(ItemName);
-//                        refreshMealPanel(array, path, parent);
+                        refreshItemPanel(array, path, parent);
                     }
                 }
             });
@@ -189,7 +190,7 @@ public class EditProduct {
                 new EmptyBorder(4, 4, 4, 4)
         ));
 
-        productidLabel.setText("Item's ID:");
+        productidLabel.setText("Products's ID:");
         productidLabel.setFont(minefont);
         productidLabel.setForeground(new Color(0x8d6e63));
         productidLabel.setPreferredSize(new Dimension(250, 20));
@@ -198,7 +199,7 @@ public class EditProduct {
         getId.setPreferredSize(new Dimension(250, 30));
         getId.setForeground(Color.white);
 
-        productNameLabel.setText("Item's Name:");
+        productNameLabel.setText("Products's Name:");
         productNameLabel.setFont(minefont);
         productNameLabel.setForeground(new Color(0x8d6e63));
         productNameLabel.setPreferredSize(new Dimension(250, 20));
@@ -207,7 +208,8 @@ public class EditProduct {
         getName.setPreferredSize(new Dimension(250, 30));
         getName.setForeground(Color.white);
 
-        productPriceLabel.setText("Item's Price:");
+
+        productPriceLabel.setText("Products's Price:");
         productPriceLabel.setFont(minefont);
         productPriceLabel.setForeground(new Color(0x8d6e63));
         productPriceLabel.setPreferredSize(new Dimension(250, 20));
@@ -217,7 +219,7 @@ public class EditProduct {
         getPrice.setForeground(Color.white);
         getPrice.setPreferredSize(new Dimension(250, 30));
 
-        productQuantityLabel.setText("Item's Quantity:");
+        productQuantityLabel.setText("Products's Quantity:");
         productQuantityLabel.setFont(minefont);
         productQuantityLabel.setForeground(new Color(0x8d6e63));
         productQuantityLabel.setPreferredSize(new Dimension(250, 20));
@@ -260,10 +262,10 @@ public class EditProduct {
         JLabel NameLabel = new JLabel();
         JLabel PriceLabel = new JLabel();
         JPanel InfoPanel = new JPanel();
-        Item currItem;
+        Products currProducts;
 
-        public ButtonForMeals_EditFrame(Item item) {
-            currItem = item;
+        public ButtonForMeals_EditFrame(Products products) {
+            currProducts = products;
             this.setLayout(new BorderLayout());
             this.setPreferredSize(new Dimension(250, 160));
             this.setMaximumSize(new Dimension(250, 160));
@@ -278,10 +280,10 @@ public class EditProduct {
             DetailsButton.setPreferredSize(new Dimension(100, 100));
             DetailsButton.setMaximumSize(new Dimension(100, 100));
             DetailsButton.addActionListener(_ -> {
-                getId.setText(String.valueOf(item.getId()));
-                getName.setText(item.getName());
-                getPrice.setText(String.valueOf(item.getPrice() + '$'));
-                getQuantity.setText(item.getQuantity() + " Pieces");
+                getId.setText(String.valueOf(products.getId()));
+                getName.setText(products.getName());
+                getPrice.setText(String.valueOf(products.getPrice() + '$'));
+                getQuantity.setText(products.getQuantity() + " Pieces");
                 frame.repaint();
             });
 
@@ -293,10 +295,10 @@ public class EditProduct {
 
             NameLabel.setForeground(Color.WHITE);
             NameLabel.setFont(new Font("Arial", Font.BOLD, 15));
-            NameLabel.setText(item.getName());
+            NameLabel.setText(products.getName());
 
             PriceLabel.setForeground(Color.WHITE);
-            PriceLabel.setText(String.valueOf(item.getPrice() + '$'));
+            PriceLabel.setText(String.valueOf(products.getPrice() + '$'));
             PriceLabel.setFont(new Font("Arial", Font.BOLD, 15));
 
             /*-------------Add Component--------------*/
@@ -309,8 +311,8 @@ public class EditProduct {
 
     // to Read From The Array And Passing data in ButtonForMeals_EditFrame To Show It
 
-    public void addCookingButton(JPanel panel, Item item) {
-        ButtonForMeals_EditFrame newItem = new ButtonForMeals_EditFrame(item);
+     public void addItemButton(JPanel panel, Products products) {
+        ButtonForMeals_EditFrame newItem = new ButtonForMeals_EditFrame(products);
         newItem.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -335,32 +337,33 @@ public class EditProduct {
     }
 
     // to Refresh the Meals onn the panel after any operation(Add, Edit, delete)
-//    private void refreshMealPanel(String array, String path, Container parent) {
-//        if (array.equals("Appetizers")) {
-//            AdminClass.AppetizerMeals.clear();
-//            parent.removeAll();
-//            AdminClass.readMeals(path);
-//            for (MealClass x : AdminClass.AppetizerMeals) {
-//                addCookingButton(computersPanel, x);
-//            }
-//        } else if (array.equals("Main Meals")) {
-//            AdminClass.MainMealMeals.clear();
-//            parent.removeAll();
-//            AdminClass.readMeals(path);
-//            for (MealClass x : AdminClass.MainMealMeals) {
-//                addCookingButton(accessoriesPanel, x);
-//            }
-//        } else {
-//            AdminClass.furnitureMeals.clear();
-//            parent.removeAll();
-//            AdminClass.readMeals(path);
-//            for (MealClass x : AdminClass.furnitureMeals) {
-//                addCookingButton(furniturePanel, x);
-//            }
-//        }
-//        parent.revalidate();
-//        parent.repaint();
-//        frame.revalidate();
-//        frame.repaint();
-}
+    private void refreshItemPanel(String array, String path, Container parent) {
+        if (array.equals("Computers")) {
+            Administrator.computers.clear();
+            parent.removeAll();
+            Administrator.readItem(path);
+            for (Products x : Administrator.computers) {
+                addItemButton(computersPanel, x);
+            }
+        } else if (array.equals("Accessories")) {
+            Administrator.accessories.clear();
+            parent.removeAll();
+            Administrator.readItem(path);
+            for (Products x : Administrator.accessories) {
+                addItemButton(accessoriesPanel, x);
+            }
+        } else {
+            Administrator.officeFurniture.clear();
+            parent.removeAll();
+            Administrator.readItem(path);
+            for (Products x : Administrator.officeFurniture) {
+                addItemButton(furniturePanel, x);
+            }
+        }
+        parent.revalidate();
+        parent.repaint();
+        frame.revalidate();
+        frame.repaint();
+    }
 
+}

@@ -1,5 +1,7 @@
 package UI_Storehouse;
 
+import LogicalClasses.DialogMSG;
+import LogicalClasses.GeneralClass;
 import Shapes.PanelBackground;
 import Shapes.RoundLabel;
 import Shapes.RoundedTextField;
