@@ -5,14 +5,14 @@ public class Products {
     private final int id;
     private String imagePath;
     private double price;
-    private int quantity;
+    private int CurrentQuantity;
 
-    public Products(String name, int id, double price, int quantity, String imagePath) {
+    public Products(String name, int id, double price, int CurrentQuantity, String imagePath) {
         this.name = name;
         this.id = id;
         this.imagePath = imagePath;
         this.price = price;
-        this.quantity = quantity;
+        this.CurrentQuantity = CurrentQuantity;
     }
 
     public String getName() {
@@ -44,11 +44,11 @@ public class Products {
         this.price = price;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public int getCurrentQuantity() {
+        return CurrentQuantity;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setCurrentQuantity(int currentQuantity) {
+        this.CurrentQuantity = currentQuantity;
     }
 }

@@ -5,6 +5,7 @@ import Shapes.PanelBackground;
 import Shapes.RoundedTextField;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
 
 public class ProductSearch {
@@ -135,8 +136,15 @@ public class ProductSearch {
         //--------------//
         ImageBackground = new PanelBackground("src\\Resources\\SearchForBackground.jpg");
         ImageBackground.setLayout(new BorderLayout());
-        ImageBackground.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-
+        TitledBorder border = BorderFactory.createTitledBorder(
+                BorderFactory.createLineBorder(new Color(0xdaa662)),
+                "Product Preview",
+                TitledBorder.DEFAULT_JUSTIFICATION,
+                TitledBorder.DEFAULT_POSITION,
+                null,
+                Color.WHITE
+        );
+        ImageProduct.setBorder(border);
 
         //--------------//
         MainBackground.add(setName);
@@ -159,7 +167,7 @@ public class ProductSearch {
     void setInformation(Products products) {
         getId.setText(String.valueOf(products.getId()));
         getName.setText(products.getName());
-        getQuantity.setText(String.valueOf(products.getQuantity()));
+        getQuantity.setText(String.valueOf(products.getCurrentQuantity()));
         getPrice.setText(String.valueOf(products.getPrice()));
         ImageProduct = new PanelBackground(products.getImagePath());
         frame.repaint();

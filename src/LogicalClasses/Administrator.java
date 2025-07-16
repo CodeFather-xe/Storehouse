@@ -2,7 +2,7 @@ package LogicalClasses;
 
 import java.io.*;
 import java.util.ArrayList;
-
+import java.util.List;
 
 
 public class Administrator {
@@ -14,7 +14,7 @@ public class Administrator {
     public static ArrayList<Products> computers = new ArrayList<>();
     public static ArrayList<Products> accessories = new ArrayList<>();
     public static ArrayList<Products> officeFurniture = new ArrayList<>();
-//    public static ArrayList<OrderClass> Orders = new ArrayList<>();
+    public static ArrayList<Order> Orders = new ArrayList<>();
 
 
 
@@ -56,6 +56,7 @@ public class Administrator {
 //        }
 //        return totalCash;
 //    }
+
 
 
     public static void readItem(String filePath) {

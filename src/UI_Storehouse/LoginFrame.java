@@ -30,11 +30,8 @@ public class LoginFrame {
 
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-        } catch (UnsupportedLookAndFeelException ignored) {
-            Toolkit.getDefaultToolkit().beep();
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
-            ex.printStackTrace();
-            return;
+        } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException |
+                 IllegalAccessException ignored) {
         }
         JFrame.setDefaultLookAndFeelDecorated(true);
         frame.setTitle("GSSA StoreHouse");

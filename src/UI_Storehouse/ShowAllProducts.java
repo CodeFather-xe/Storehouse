@@ -114,7 +114,7 @@ public class ShowAllProducts {
             this.name = products.getName();
             this.price = products.getPrice();
             this.image = products.getImagePath();
-            this.totalQuantity = products.getQuantity();
+            this.totalQuantity = products.getCurrentQuantity();
             this.setLayout(new BorderLayout());
 
             /*-------------Details Button--------------*/

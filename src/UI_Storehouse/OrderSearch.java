@@ -1,11 +1,15 @@
 package UI_Storehouse;
 
+import LogicalClasses.Administrator;
+import LogicalClasses.Order;
 import LogicalClasses.Products;
 import Shapes.PanelBackground;
 import Shapes.RoundedTextField;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class OrderSearch {
 
@@ -18,21 +22,27 @@ public class OrderSearch {
 
     JButton GoBack = new JButton();
 
+    JLabel setNumber = new JLabel();
     JLabel setName = new JLabel();
     JLabel getName = new JLabel();
     JLabel setId = new JLabel();
     JLabel getId = new JLabel();
     JLabel setPrice = new JLabel();
     JLabel getPrice = new JLabel();
-    JLabel setQuantity = new JLabel();
-    JLabel getQuantity = new JLabel();
+    JLabel setPriority = new JLabel();
+    JLabel getPriority = new JLabel();
 
-    PanelBackground ImageProduct;
+    JPanel collectionPanel = new JPanel();
 
     Font fontSet = new Font("Serif", Font.BOLD, 20);
     Font fontGet = new Font("", Font.BOLD, 18);
 
     public OrderSearch() {
+
+        ArrayList<Products> products = new ArrayList<>();
+        products.addAll(Administrator.computers);
+        products.addAll(Administrator.accessories);
+        products.addAll(Administrator.officeFurniture);
 
         /*-------Frame-------*/
         frame.setTitle("G.S.S.A Storehouse");
@@ -53,16 +63,22 @@ public class OrderSearch {
         buttonSearch.setFocusable(false);
         buttonSearch.addActionListener(_ -> {
             int temp = Integer.parseInt(fieldSearch.getText());
+            for (Order x : Administrator.Orders) {
+                if (x.getOrderID() == temp) {
+                    setInformation(x);
+                    break;
+                }
+            }
 
         });
-        fieldSearch.setText("Enter The Id Please");
+        fieldSearch.setText("Enter Order ID Please");
         fieldSearch.setFont(new Font("Serif", Font.BOLD, 18));
         fieldSearch.setMaximumSize(new Dimension(300, 30));
         fieldSearch.setPreferredSize(new Dimension(300, 30));
-        fieldSearch.setBackground(new Color(0xdaa662));
+        fieldSearch.setBackground(new Color(0xcdcdc9));
         fieldSearch.setHorizontalAlignment(SwingConstants.CENTER);
 
-        GoBack.setText("X");
+        GoBack.setText(" X ");
         GoBack.setForeground(Color.WHITE);
         GoBack.setBackground(Color.RED);
         GoBack.setFocusable(false);
@@ -72,9 +88,14 @@ public class OrderSearch {
         });
 
         /*-------Information-------*/
-
-        setName.setText("Owner's Name: ");
-        setName.setForeground(new Color(0xdaa662));
+        setNumber.setText('-' + String.valueOf(" ") + '-');
+        setNumber.setBounds(275, 10, 100, 25);
+        setNumber.setForeground(new Color(0xcdcdc9));
+        setNumber.setAlignmentX(Component.CENTER_ALIGNMENT);
+        setNumber.setFont(fontSet);
+        //--------------//
+        setName.setText("Order's Owner: ");
+        setName.setForeground(new Color(0xcdcdc9));
         setName.setFont(fontSet);
         setName.setBounds(10, 50, 200, 25);
         //--------------//
@@ -83,8 +104,8 @@ public class OrderSearch {
         getName.setFont(fontGet);
         getName.setBounds(150, 50, 500, 25);
         //--------------//
-        setId.setText("Order ID: ");
-        setId.setForeground(new Color(0xdaa662));
+        setId.setText("Order's ID: ");
+        setId.setForeground(new Color(0xcdcdc9));
         setId.setFont(fontSet);
         setId.setBounds(10, 100, 200, 25);
         //--------------//
@@ -93,8 +114,8 @@ public class OrderSearch {
         getId.setFont(fontGet);
         getId.setBounds(65, 100, 300, 25);
         //--------------//
-        setPrice.setText("Product Price: ");
-        setPrice.setForeground(new Color(0xdaa662));
+        setPrice.setText("Order's Price: ");
+        setPrice.setForeground(new Color(0xcdcdc9));
         setPrice.setFont(fontSet);
         setPrice.setBounds(10, 150, 200, 25);
         //--------------//
@@ -103,15 +124,15 @@ public class OrderSearch {
         getPrice.setFont(fontGet);
         getPrice.setBounds(150, 150, 500, 25);
         //--------------//
-        setQuantity.setText("Current Quantity: ");
-        setQuantity.setForeground(new Color(0xdaa662));
-        setQuantity.setFont(fontSet);
-        setQuantity.setBounds(10, 200, 200, 25);
+        setPriority.setText("Order's Priority: ");
+        setPriority.setForeground(new Color(0xcdcdc9));
+        setPriority.setFont(fontSet);
+        setPriority.setBounds(10, 200, 200, 25);
         //--------------//
-        getQuantity.setText("");
-        getQuantity.setForeground(Color.WHITE);
-        getQuantity.setFont(fontGet);
-        getQuantity.setBounds(175, 200, 500, 25);
+        getPriority.setText("");
+        getPriority.setForeground(Color.WHITE);
+        getPriority.setFont(fontGet);
+        getPriority.setBounds(175, 200, 500, 25);
 
         JPanel panelSearch = new JPanel();
         panelSearch.setOpaque(false);
@@ -124,30 +145,41 @@ public class OrderSearch {
         panelSearch.add(buttonSearch);
         panelSearch.add(Box.createVerticalStrut(10));
 
-        ImageProduct = new PanelBackground("");
-        ImageProduct.setBounds(25, 230, 500, 430);
-        ImageProduct.setBorder(BorderFactory.createTitledBorder(BorderFactory.createLineBorder(new Color(0xdaa662)), "Image Product"));
+
+        collectionPanel.setOpaque(false);
+        collectionPanel.setBounds(27, 232, 498, 428);
+
+
+        TitledBorder border = BorderFactory.createTitledBorder(
+                BorderFactory.createLineBorder(new Color(0xdaa662)),
+                "Order's Product",
+                TitledBorder.DEFAULT_JUSTIFICATION,
+                TitledBorder.DEFAULT_POSITION,
+                null,
+                Color.WHITE
+        );
+//        ImageProduct.setBorder(border);
 
         /*-------Panel Modifies-------*/
         MainBackground.setBackground(new Color(0, 0, 0, 140));
         MainBackground.setLayout(null);
         MainBackground.setBackground(new Color(0, 0, 0, 140));
         //--------------//
-        ImageBackground = new PanelBackground("src\\Resources\\SearchForBackground.jpg");
+        ImageBackground = new PanelBackground("src\\Resources\\SearchForBackground1.jpg");
         ImageBackground.setLayout(new BorderLayout());
         ImageBackground.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
 
         //--------------//
+        MainBackground.add(setNumber);
         MainBackground.add(setName);
         MainBackground.add(getName);
         MainBackground.add(setId);
         MainBackground.add(getId);
         MainBackground.add(setPrice);
         MainBackground.add(getPrice);
-        MainBackground.add(setQuantity);
-        MainBackground.add(getQuantity);
-        MainBackground.add(ImageProduct);
+        MainBackground.add(setPriority);
+        MainBackground.add(getPriority);
         //--------------//
         ImageBackground.add(panelSearch, BorderLayout.NORTH);
         ImageBackground.add(MainBackground, BorderLayout.CENTER);
@@ -156,12 +188,50 @@ public class OrderSearch {
         frame.setVisible(true);
     }
 
-    void setInformation(Products products) {
-        getId.setText(String.valueOf(products.getId()));
-        getName.setText(products.getName());
-        getQuantity.setText(String.valueOf(products.getQuantity()));
-        getPrice.setText(String.valueOf(products.getPrice()));
-        ImageProduct = new PanelBackground(products.getImagePath());
+    public class ProductPanel extends JPanel {
+        JLabel itemName = new JLabel();
+        JLabel itemPrice = new JLabel();
+
+        public ProductPanel(Products item) {
+            this.setBackground(new Color(0, 0, 0, 0));
+            this.setLayout(new BorderLayout());
+            this.setPreferredSize(new Dimension(530, 30));
+            this.setBorder(BorderFactory.createEmptyBorder(5, 5, 0, 12));
+
+
+            itemName.setFont(new Font("Serif", Font.BOLD, 24));
+            itemName.setForeground(Color.LIGHT_GRAY);
+            itemName.setHorizontalAlignment(JLabel.LEFT);
+
+            itemPrice.setText("");
+            itemPrice.setFont(new Font("Serif", Font.BOLD, 24));
+            itemPrice.setForeground(Color.LIGHT_GRAY);
+            itemPrice.setHorizontalAlignment(JLabel.RIGHT);
+
+
+            itemName.setText("- " + item.getName() + "   × " + item.getCurrentQuantity());
+            itemPrice.setText(String.format("%.2f", item.getPrice() * item.getPrice()) + '$');
+            this.add(itemName, BorderLayout.WEST);
+            this.add(itemPrice, BorderLayout.EAST);
+
+        }
+    }
+
+
+    void setInformation(Order order) {
+        setNumber.setText('-' + String.valueOf(order.getOrderID()) + '-');
+        getName.setText(order.getOwner());
+        if (order.getPriority() == 1) {
+            getPriority.setForeground(Color.red);
+            getPriority.setText("High");
+        } else if (order.getPriority() == 0) {
+            getPriority.setForeground(Color.BLUE);
+            getPriority.setText("Normal");
+        } else {
+            getPriority.setForeground(Color.YELLOW);
+            getPriority.setText("Not Important");
+        }
+        getPrice.setText(String.valueOf(order.getCost()));
         frame.repaint();
     }
 }

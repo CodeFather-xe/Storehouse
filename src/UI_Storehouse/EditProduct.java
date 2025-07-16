@@ -283,7 +283,7 @@ public class EditProduct {
                 getId.setText(String.valueOf(products.getId()));
                 getName.setText(products.getName());
                 getPrice.setText(String.valueOf(products.getPrice() + '$'));
-                getQuantity.setText(products.getQuantity() + " Pieces");
+                getQuantity.setText(products.getCurrentQuantity() + " Pieces");
                 frame.repaint();
             });
 

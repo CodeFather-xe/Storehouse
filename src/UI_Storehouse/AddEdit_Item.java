@@ -166,7 +166,7 @@ public class AddEdit_Item {
     public AddEdit_Item(JFrame mainframe, Products products, String tabTitle) {
         nameField = new RoundedTextField(products.getName(), 20);
         priceField = new RoundedTextField(String.valueOf(products.getPrice()) + '$', 20);
-        quantityField = new RoundedTextField(products.getQuantity() + " Pieces", 20);
+        quantityField = new RoundedTextField(products.getCurrentQuantity() + " Pieces", 20);
         pathField = new RoundedTextField(products.getImagePath(), 20);
 
         oldItemName = nameField.getText();

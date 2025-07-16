@@ -3,12 +3,13 @@ package LogicalClasses;
 import java.util.ArrayList;
 
 public class Order {
-    String orderID;
-    double cost;
-    int priority;
+    private String owner;
+    private int orderID;
+    private double cost;
+    private int priority;
     ArrayList<Products> products;
 
-    public Order(String orderID) {
+    public Order(int orderID) {
         this.orderID = orderID;
         this.products = new ArrayList<>();
         this.cost = 0;
@@ -20,6 +21,14 @@ public class Order {
 
     public void setCost(double cost) {
         this.cost = cost;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 
     public int getPriority() {
@@ -44,11 +53,11 @@ public class Order {
         return null;
     }
 
-    public String getOrderID() {
+    public int getOrderID() {
         return orderID;
     }
 
-    public void setOrderID(String orderID) {
+    public void setOrderID(int orderID) {
         this.orderID = orderID;
     }
 
@@ -63,7 +72,7 @@ public class Order {
     public boolean updateProductQuantity(int productID, int newQuantity) {
         Products product = searchProduct(productID);
         if (product != null) {
-            product.setQuantity(newQuantity);
+            product.setCurrentQuantity(newQuantity);
             return true;
         }
         return false;
